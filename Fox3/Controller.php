@@ -2,7 +2,8 @@
 
 namespace App\Fox3;
 
-use Fox3\Template;
+use App\Fox3\Exceptions\ControllerException;
+use App\Fox3\Template;
 use Exception;
 use ReflectionClass;
 use ReflectionObject;
@@ -23,7 +24,7 @@ class Controller {
 
     public function call($controller, $function) {
         if (!method_exists($controller, $function)) {
-            throw new Exception("method not found in controller");
+            throw new ControllerException("method not found in controller");
         }
         
         $functionInstance = (new ReflectionObject($controller))->getMethod($function);
@@ -42,7 +43,7 @@ class Controller {
         list($class, $function) = explode('@', $actions[0]);
 
         if (empty($class)) {
-            throw new Exception("Invalid route");
+            throw new ControllerException("Invalid request method");
         }
 
         return [$class, $function];
