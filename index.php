@@ -1,9 +1,22 @@
 <?php
 namespace App;
 
-use App\Fox3\Server;
+/**
+ * Simple autoloader
+ *
+ * @param $class_name - String name for the class that is trying to be loaded.
+ */
+spl_autoload_register(function ( $class_name ) {
+    $file = __DIR__.'\\'. str_replace('App\\', '', $class_name) . '.php';
 
-require_once 'fox3/Server.php';
+    if ( file_exists($file) ) {
+        require_once $file;
+    }
+
+});
+
+
+use App\Fox3\Server;
 
 $routes = [
   '/usuarios' => [
@@ -23,10 +36,6 @@ $routes = [
     ['get' => 'HomeController@index'],
   ],
 ];
-
-$URI = @$_SERVER['REQUEST_URI'];
-$METHOD = @$_SERVER['REQUEST_METHOD'];
-$parsed_url = parse_url($URI, PHP_URL_PATH);
 
 $server = new Server($routes);
 $server->serve();

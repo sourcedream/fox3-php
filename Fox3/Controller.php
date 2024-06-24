@@ -7,8 +7,6 @@ use Exception;
 use ReflectionClass;
 use ReflectionObject;
 
-require_once 'Template.php';
-
 class Controller {
 
     public function dispatchCall($routeData, $method) {

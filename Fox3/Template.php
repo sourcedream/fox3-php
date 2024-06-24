@@ -27,7 +27,7 @@ class Template {
     extract($this->data);
 
     $template_file = 'Views/' . $this->template;
-    include_once $template_file;
+    include_once $template_file; //NOSONAR
 
     return ob_get_clean();
   }
