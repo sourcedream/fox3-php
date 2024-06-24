@@ -1,11 +1,13 @@
 <?php include('Views/header.php'); ?>
 
-Emcerrar MDFE
+<p>
+  Escaneie com a câmera o código de barras do MDFE.
+</p>
 
 <form method="POST">
   <input type="text" name="barcode" id="barcode">
   <button type="submit" class="btn btn-info">encerrar</button>
-  <div id="reader" width="600px" style="width: 600px;"></div>
+  <div id="reader" width="600px" style="width: 600px;height:600px;"></div>
 </form>
 
 <!-- <script src="/pub/quagga.min.js"></script> -->
@@ -56,7 +58,6 @@ Emcerrar MDFE
     console.log(result.codeResult);
     document.querySelector('#barcode').value = result.codeResult.code;
   });*/
-
   // This method will trigger user permissions
   Html5Qrcode.getCameras().then(devices => {
     /**
@@ -66,10 +67,8 @@ Emcerrar MDFE
     if (devices && devices.length) {
       var cameraId = devices[0].id;
       // .. use this to start scanning.
-
       const html5QrCode = new Html5Qrcode(/* element id */ "reader");
-      html5QrCode.start(
-        cameraId, 
+      html5QrCode.start(cameraId, 
         {
           fps: 10,    // Optional, frame per seconds for qr code scanning
           qrbox: { width: 250, height: 250 }  // Optional, if you want bounded box UI
@@ -84,15 +83,16 @@ Emcerrar MDFE
           }).catch(err =>{});
         },
         (errorMessage) => {
-          // parse error, ignore it.
+          console.log(errorMessage);
         })
       .catch((err) => {
         // Start failed, handle it.
+        console.log(err);
       });
 
     }
   }).catch(err => {
-    // handle err
+    console.error(err);
   });
 
 </script>
