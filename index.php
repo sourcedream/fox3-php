@@ -3,7 +3,7 @@ namespace App;
 
 use App\Fox3\Server;
 
-require_once('fox3/Server.php');
+require_once 'fox3/Server.php';
 
 $routes = [
   '/usuarios' => [

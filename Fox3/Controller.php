@@ -7,7 +7,7 @@ use Exception;
 use ReflectionClass;
 use ReflectionObject;
 
-require_once('Template.php');
+require_once 'Template.php';
 
 class Controller {
 
@@ -19,14 +19,15 @@ class Controller {
     }
 
     protected function instatiateController($class) {
-        require_once('Controllers\\'.$class . '.php');
+        require_once 'Controllers\\'.$class . '.php';
         $instance = new ReflectionClass('App\\Controllers\\' . $class);
         return $instance->newInstance(); //TODO: Check for constructor deps
     }
 
     public function call($controller, $function) {
-        if (!method_exists($controller, $function))
+        if (!method_exists($controller, $function)) {
             throw new Exception("method not found in controller");
+        }
         
         $functionInstance = (new ReflectionObject($controller))->getMethod($function);
         return $functionInstance->invokeArgs($this, []); //TODO: Add paremeters here

@@ -2,8 +2,8 @@
 
 namespace App\Fox3;
 
-require_once('Controller.php');
-require_once('Router.php');
+require_once 'Controller.php';
+require_once 'Router.php';
 
 class Server {
 
