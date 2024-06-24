@@ -12,11 +12,11 @@ class Template {
 
   /**
    * Data
-   * @var Array
+   * @var array
    */
   protected $data;
 
-  public function __construct(string $template, Array $data = []) {
+  public function __construct(string $template, array $data = []) {
     $this->template = $template;
     $this->data = $data;
   }
@@ -27,7 +27,7 @@ class Template {
     extract($this->data);
 
     $template_file = 'Views/' . $this->template;
-    include($template_file);
+    include_once $template_file; //NOSONAR
 
     return ob_get_clean();
   }

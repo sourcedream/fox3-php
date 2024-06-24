@@ -7,8 +7,6 @@ use Exception;
 use ReflectionClass;
 use ReflectionObject;
 
-require_once('Template.php');
-
 class Controller {
 
     public function dispatchCall($routeData, $method) {
@@ -19,14 +17,14 @@ class Controller {
     }
 
     protected function instatiateController($class) {
-        require_once('Controllers\\'.$class . '.php');
         $instance = new ReflectionClass('App\\Controllers\\' . $class);
         return $instance->newInstance(); //TODO: Check for constructor deps
     }
 
     public function call($controller, $function) {
-        if (!method_exists($controller, $function))
+        if (!method_exists($controller, $function)) {
             throw new Exception("method not found in controller");
+        }
         
         $functionInstance = (new ReflectionObject($controller))->getMethod($function);
         return $functionInstance->invokeArgs($this, []); //TODO: Add paremeters here
@@ -34,11 +32,11 @@ class Controller {
 
     /**
      * Find the desired Controller and its method
-     * @param Array $routeData Data is gained from route file
+     * @param array $routeData Data is gained from route file
      * @param string $method Is the current HTTP Method
-     * @return Array
+     * @return array
      */
-    protected function findControllerMethod($routeData, $method) : Array
+    protected function findControllerMethod($routeData, $method) : array
     {
         $actions = array_column($routeData, strtolower($method));
         list($class, $function) = explode('@', $actions[0]);
@@ -50,7 +48,7 @@ class Controller {
         return [$class, $function];
     }
 
-    protected function view(string $template_name, Array $data = []) : string {
+    protected function view(string $template_name, array $data = []) : string {
         $template = new Template($template_name, $data);
         return $template->render();
     }

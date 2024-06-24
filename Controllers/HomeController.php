@@ -6,6 +6,6 @@ use App\Fox3\Controller;
 
 class HomeController extends Controller {
     public function index() {
-        return 'Home';
+        return $this->view('home.php');
     }
 }
