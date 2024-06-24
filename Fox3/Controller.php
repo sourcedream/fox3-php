@@ -35,9 +35,9 @@ class Controller {
 
     /**
      * Find the desired Controller and its method
-     * @param Array $routeData Data is gained from route file
+     * @param array $routeData Data is gained from route file
      * @param string $method Is the current HTTP Method
-     * @return Array
+     * @return array
      */
     protected function findControllerMethod($routeData, $method) : Array
     {

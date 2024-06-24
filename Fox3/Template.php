@@ -12,11 +12,11 @@ class Template {
 
   /**
    * Data
-   * @var Array
+   * @var array
    */
   protected $data;
 
-  public function __construct(string $template, Array $data = []) {
+  public function __construct(string $template, array $data = []) {
     $this->template = $template;
     $this->data = $data;
   }
