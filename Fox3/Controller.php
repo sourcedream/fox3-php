@@ -17,7 +17,6 @@ class Controller {
     }
 
     protected function instatiateController($class) {
-        require_once 'Controllers\\'.$class . '.php';
         $instance = new ReflectionClass('App\\Controllers\\' . $class);
         return $instance->newInstance(); //TODO: Check for constructor deps
     }
@@ -37,7 +36,7 @@ class Controller {
      * @param string $method Is the current HTTP Method
      * @return array
      */
-    protected function findControllerMethod($routeData, $method) : Array
+    protected function findControllerMethod($routeData, $method) : array
     {
         $actions = array_column($routeData, strtolower($method));
         list($class, $function) = explode('@', $actions[0]);
@@ -49,7 +48,7 @@ class Controller {
         return [$class, $function];
     }
 
-    protected function view(string $template_name, Array $data = []) : string {
+    protected function view(string $template_name, array $data = []) : string {
         $template = new Template($template_name, $data);
         return $template->render();
     }
