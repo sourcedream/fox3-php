@@ -23,7 +23,7 @@ $routes = [
     ['post' => 'Controllers/Users@create'],
   ],
   '/usuarios/{id}' => [
-    ['get' => 'show user'],
+    ['get' => 'HomeController@showUser'],
   ],
 
   '/encerrar-mdfe' => [
