@@ -7,14 +7,13 @@ namespace App;
  * @param $class_name - String name for the class that is trying to be loaded.
  */
 spl_autoload_register(function ( $class_name ) {
-    $file = __DIR__.'\\'. str_replace('App\\', '', $class_name) . '.php';
+  $file = __DIR__.'\\'. str_replace('App\\', '', $class_name) . '.php';
 
-    if ( file_exists($file) ) {
-        require_once $file;
-    }
+  if ( file_exists($file) ) {
+      require_once $file; //NOSONAR
+  }
 
 });
-
 
 use App\Fox3\Server;
 
@@ -24,7 +23,7 @@ $routes = [
     ['post' => 'Controllers/Users@create'],
   ],
   '/usuarios/{id}' => [
-    ['get' => 'show user'],
+    ['get' => 'HomeController@showUser'],
   ],
 
   '/encerrar-mdfe' => [

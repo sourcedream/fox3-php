@@ -1,6 +1,6 @@
 <?php
 
-namespace Fox3;
+namespace App\Fox3;
 
 class Template {
 
