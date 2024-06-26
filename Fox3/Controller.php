@@ -4,7 +4,6 @@ namespace App\Fox3;
 
 use App\Fox3\Exceptions\ControllerException;
 use App\Fox3\Template;
-use Exception;
 use ReflectionClass;
 use ReflectionObject;
 
@@ -24,7 +23,7 @@ class Controller {
 
     public function call($controller, $function) {
         if (!method_exists($controller, $function)) {
-            throw new ControllerException("method not found in controller");
+            throw new ControllerException("Method '{$function}' not found in controller");
         }
         
         $functionInstance = (new ReflectionObject($controller))->getMethod($function);
