@@ -9,7 +9,12 @@ class HomeController extends Controller {
         return $this->view('home.php');
     }
 
+    public function sobre() {
+        return "Sobre";
+    }
+
+    // Private route
     public function showUser() {
-        return "oi";
+        return "oi usuario";
     }
 }
