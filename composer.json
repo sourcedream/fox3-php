@@ -3,6 +3,9 @@
         "psr-4": {
             "Fox3\\": "Fox3/",
             "App\\Controllers\\": "Controllers/"
-        }
+        },
+        "files": [
+            "Fox3/Helpers/helpers.php"
+        ]
     }
 }
