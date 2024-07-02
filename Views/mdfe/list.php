@@ -1,7 +1,13 @@
 <?php include_once 'Views/header.php'; ?>
 
-
 <div class="container">
+
+    <?php
+        $success = flashMessage('success');
+        if (isset($success) && !empty($success)) {
+    ?>
+    <div class="alert alert-success" role="alert"><?=$success?></div>
+    <?php } ?>
 
     <a href="/novo-mdfe" class="btn btn-info">Novo MDFE</a>
 
@@ -9,18 +15,22 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Filial</th>
+                <th scope="col">Chave</th>
+                <th scope="col">Protocolo</th>
+                <th scope="col">Status</th>
             </tr>
         </thead>
         <tbody>
+            <?php foreach($dados as $dado) { ?>
             <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <th scope="row"><?=$dado['id'];?></th>
+                <td><?=$dado['nome_filial'];?></td>
+                <td><?=$dado['chave'];?></td>
+                <td><?=$dado['protocolo'];?></td>
+                <td><?=$dado['status'];?></td>
             </tr>
+            <?php } ?>
         </tbody>
     </table>
 </div>
