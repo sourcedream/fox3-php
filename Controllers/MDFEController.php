@@ -7,6 +7,8 @@ use Fox3\Helpers\Mysql;
 
 class MDFEController extends Controller {
 
+    //-----------------------------------------------
+    // Authenticated routes
     // TODO: Autenticate the user here
     public function listmdfe() {
         $MDFEs = $this->getMFDEs();
@@ -40,6 +42,8 @@ class MDFEController extends Controller {
         return $this->redirect('/listar-mdfe');
     }
 
+    //-----------------------------------------------
+    // Public routes
     public function closeMDFEPage() {
         return $this->view('mdfe/close.php');
     }
