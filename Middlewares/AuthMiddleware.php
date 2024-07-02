@@ -5,6 +5,7 @@ namespace App\Middlewares;
 class AuthMiddleware {
 
     public function handle()  {
-        return false;
+        $login = $_SESSION['authenticated'];
+        return isset($login) && !empty($login);
     }
 }

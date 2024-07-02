@@ -19,20 +19,18 @@ session_start();
 use Fox3\Server;
 
 $routes = [
-  '/usuarios' => [
-    ['get' => 'UsersController@index'],
-    ['post' => 'Controllers/Users@create'],
-  ],
-  '/usuarios/{id}' => [
-    ['middleware' => ['AuthMiddleware']],
-    ['get' => 'HomeController@showUser'],
+  '/login' => [
+    ['get' => 'LoginController@index'],
+    ['post' => 'LoginController@login'],
   ],
 
   '/listar-mdfe' => [
+    ['middleware' => ['AuthMiddleware']],
     ['get' => 'MDFEController@listmdfe'],
   ],
 
   '/novo-mdfe' => [
+    ['middleware' => ['AuthMiddleware']],
     ['get' => 'MDFEController@newMDFE'],
     ['post' => 'MDFEController@saveMDFE'],
   ],
@@ -48,9 +46,6 @@ $routes = [
 
   '/' => [
     ['get' => 'HomeController@index'],
-  ],
-  '/sobre' => [
-    ['get' => 'HomeController@sobre'],
   ],
 ];
 

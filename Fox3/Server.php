@@ -27,7 +27,7 @@ class Server {
         $choosen_route =$router->findRouteDefinition($parsed_url, $this->routes);
 
         if (!$this->handleMiddleware($choosen_route)) {
-            header("Location: /");
+            header("Location: /login");
             exit();
         }
         
