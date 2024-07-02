@@ -12,3 +12,9 @@ auxiliar no desenvolvimento sem utilizar sistemas de third-party e pacotes adici
 - [ ] Handle dependency injection in controllers constructor
 - [ ] Handle dependency injection in controllers methods
 - [ ] A way to write tests
+
+
+
+
+- Exemplo Chave MDFE
+512407123456780001955811234511678901231  - protocolo: 135230000000000    - municipio: 5103403   (cuiaba)

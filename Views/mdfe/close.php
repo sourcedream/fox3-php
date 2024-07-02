@@ -1,13 +1,24 @@
 <?php include('Views/header.php'); ?>
 
 <p>
-  Escaneie com a câmera o código de barras do MDFE.
+  Escaneie com a câmera o código de barras do MDFE. 
 </p>
 
+<?php 
+if (isset($aviso) && !empty($aviso)) {
+?>
+<div class="alert alert-warning"><?=$aviso;?></div>
+<?php } ?>
+
 <form method="POST">
-  <input type="text" name="barcode" id="barcode">
-  <button type="submit" class="btn btn-info">encerrar</button>
-  <div id="reader" width="600px" style="width: 600px;height:600px;"></div>
+  <div class="mb-3">
+      <label for="barcode" class="form-label">Chave</label>
+      <input type="text" class="form-control" id="barcode" name="barcode" aria-describedby="Chave do MDFE" required>
+  </div>
+        
+  <button type="submit" class="btn btn-info">Encerrar MDF-e</button>
+  <div width="600px" style="width: 100%; margin-top: 10px; text-align:center">Camera</div>
+  <div id="reader" width="600px" style="width: 600px;height:600px; margin-top: 10px; left: calc(50% - 300px); border:1px solid black; text-align:center">Carregando...</div>
 </form>
 
 <!-- <script src="/pub/quagga.min.js"></script> -->
@@ -71,7 +82,7 @@
       html5QrCode.start(cameraId, 
         {
           fps: 10,    // Optional, frame per seconds for qr code scanning
-          qrbox: { width: 250, height: 250 }  // Optional, if you want bounded box UI
+          qrbox: { width: 450, height: 250 }  // Optional, if you want bounded box UI
         },
         (decodedText, decodedResult) => {
           // do something when code is read

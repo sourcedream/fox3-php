@@ -11,6 +11,11 @@ spl_autoload_register(function ( $class_name ) {
 
 });
 
+putenv('DBUSER=root');
+putenv('DBNAME=mdfes');
+
+session_start();
+
 use Fox3\Server;
 
 $routes = [
