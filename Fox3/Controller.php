@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Fox3;
+namespace Fox3;
 
-use App\Fox3\Exceptions\ControllerException;
-use App\Fox3\Template;
+use Fox3\Exceptions\ControllerException;
+use Fox3\Template;
 use ReflectionClass;
 use ReflectionObject;
 

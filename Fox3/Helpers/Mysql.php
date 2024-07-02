@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Fox3\Helpers;
+namespace Fox3\Helpers;
 
 use mysqli;
 

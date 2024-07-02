@@ -1,11 +1,7 @@
 <?php
 namespace App;
+require 'vendor/autoload.php';
 
-/**
- * Simple autoloader
- *
- * @param $class_name - String name for the class that is trying to be loaded.
- */
 spl_autoload_register(function ( $class_name ) {
   $file = __DIR__.'\\'. str_replace('App\\', '', $class_name) . '.php';
 
@@ -15,7 +11,7 @@ spl_autoload_register(function ( $class_name ) {
 
 });
 
-use App\Fox3\Server;
+use Fox3\Server;
 
 $routes = [
   '/usuarios' => [
