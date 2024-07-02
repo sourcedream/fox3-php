@@ -2,7 +2,7 @@
     "autoload": {
         "psr-4": {
             "Fox3\\": "Fox3/",
-            "App\\Controllers\\": "Controllers/",
+            "App\\Controllers\\": "Controllers/"
         }
     }
 }
