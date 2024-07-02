@@ -48,6 +48,11 @@ class Controller {
         return [$class, $function];
     }
 
+    protected function redirect(string $url) {
+        header("Location: {$url}");
+        exit();
+    }
+
     protected function view(string $template_name, array $data = []) : string {
         $template = new Template($template_name, $data);
         return $template->render();
