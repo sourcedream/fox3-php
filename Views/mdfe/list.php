@@ -10,6 +10,7 @@
     <?php } ?>
 
     <a href="/novo-mdfe" class="btn btn-info">Novo MDFE</a>
+    <a href="/sair" class="btn btn-warning">Sair do Sistema</a>
 
     <table class="table">
         <thead>

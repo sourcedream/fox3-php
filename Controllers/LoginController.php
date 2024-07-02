@@ -25,6 +25,11 @@ class LoginController extends Controller {
         $this->redirect('/listar-mdfe');
     }
 
+    public function logout() {
+        session_destroy();
+        $this->redirect('/');
+    }
+
     private function getUser($USERNAME) {
         $con = Mysql::conn();
         $stm = $con->prepare('SELECT * FROM usuarios WHERE usuario = ?');

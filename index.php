@@ -24,6 +24,10 @@ $routes = [
     ['post' => 'LoginController@login'],
   ],
 
+  '/sair' => [
+    ['get' => 'LoginController@logout'],
+  ],
+
   '/listar-mdfe' => [
     ['middleware' => ['AuthMiddleware']],
     ['get' => 'MDFEController@listmdfe'],
