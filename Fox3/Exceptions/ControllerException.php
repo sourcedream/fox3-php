@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Fox3\Exceptions;
+namespace Fox3\Exceptions;
 
 class ControllerException extends \Exception {
 

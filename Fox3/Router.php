@@ -1,5 +1,5 @@
 <?php
-namespace App\Fox3;
+namespace Fox3;
 
 class Router {
     
