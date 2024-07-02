@@ -26,9 +26,22 @@ $routes = [
     ['get' => 'HomeController@showUser'],
   ],
 
+  '/listar-mdfe' => [
+    ['get' => 'MDFEController@listmdfe'],
+  ],
+
+  '/novo-mdfe' => [
+    ['get' => 'MDFEController@newMDFE'],
+    ['post' => 'MDFEController@saveMDFE'],
+  ],
+
   '/encerrar-mdfe' => [
     ['get' => 'MDFEController@closeMDFEPage'],
     ['post' => 'MDFEController@closeMDFE'],
+  ],
+
+  '/mdfe-encerrado' => [
+    ['get' => 'MDFEController@mdfeClosed']
   ],
 
   '/' => [

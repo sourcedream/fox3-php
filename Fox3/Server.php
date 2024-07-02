@@ -23,7 +23,7 @@ class Server {
         
         $router = new Router();
         $choosen_route =$router->findRouteDefinition($parsed_url, $this->routes);
-        
+
         $response = $controllerDispatcher->dispatchCall($choosen_route, $method);
         print_r($response);
     }
