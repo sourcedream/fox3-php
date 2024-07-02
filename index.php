@@ -1,6 +1,6 @@
 <?php
 namespace App;
-require 'vendor/autoload.php';
+require_once 'vendor/autoload.php'; //NOSONAR
 
 spl_autoload_register(function ( $class_name ) {
   $file = __DIR__.'\\'. str_replace('App\\', '', $class_name) . '.php';
@@ -19,6 +19,7 @@ $routes = [
     ['post' => 'Controllers/Users@create'],
   ],
   '/usuarios/{id}' => [
+    ['middleware' => ['AuthMiddleware']],
     ['get' => 'HomeController@showUser'],
   ],
 
@@ -29,6 +30,9 @@ $routes = [
 
   '/' => [
     ['get' => 'HomeController@index'],
+  ],
+  '/sobre' => [
+    ['get' => 'HomeController@sobre'],
   ],
 ];
 
