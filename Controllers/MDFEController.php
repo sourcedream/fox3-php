@@ -12,6 +12,8 @@ class MDFEController extends Controller {
      */
     private $mdfeService;
 
+    private $newMDFETemplate = 'mdfe/new.php';
+
     public function __construct() {
         $this->mdfeService = new MDFEService();
     }
@@ -24,7 +26,7 @@ class MDFEController extends Controller {
     }
 
     public function newMDFE() {
-        return $this->view('mdfe/new.php');
+        return $this->view($this->newMDFETemplate);
     }
 
     public function saveMDFE() {
@@ -37,13 +39,13 @@ class MDFEController extends Controller {
         $erros = $this->validateForm($chave, $protocolo, $filial_id, $cod_municipio);
 
         if (count($erros) > 0) {
-            return $this->view('mdfe/new.php', ['erros' => $erros]);
+            return $this->view($this->newMDFETemplate, ['erros' => $erros]);
         }
 
         $insert = $this->mdfeService->insertMDFE($chave, $protocolo, $filial_id, $cod_municipio, $status);
 
         if ($insert <= 0) {
-            return $this->view('mdfe/new.php', ['aviso' => 'Falha na inclusão. Contate o suporte']);
+            return $this->view($this->newMDFETemplate, ['aviso' => 'Falha na inclusão. Contate o suporte']);
         }
 
         $_SESSION['success']  = 'MDF-e cadastrado com sucesso';
