@@ -38,8 +38,9 @@ class Server {
     private function handleMiddleware($route) {
         $middlewares = array_column($route, 'middleware');
 
-        if (!isset($middlewares) || empty($middlewares))
+        if (!isset($middlewares) || empty($middlewares)) {
             return true;
+        }
 
         foreach($middlewares[0] as $middleware) {
             $reflector = new ReflectionClass('App\\Middlewares\\' . $middleware);
