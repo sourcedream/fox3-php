@@ -1,10 +1,10 @@
 <?php include_once 'Views/header.php'; ?>
 
 <p>
-  Escaneie com a câmera o código de barras do MDFE. 
+  Escaneie com a câmera o código de barras do MDFE.
 </p>
 
-<?php 
+<?php
 if (isset($aviso) && !empty($aviso)) {
 ?>
 <div class="alert alert-warning"><?=$aviso;?></div>
@@ -79,7 +79,7 @@ if (isset($aviso) && !empty($aviso)) {
       var cameraId = devices[0].id;
       // .. use this to start scanning.
       const html5QrCode = new Html5Qrcode(/* element id */ "reader");
-      html5QrCode.start(cameraId, 
+      html5QrCode.start(cameraId,
         {
           fps: 10,    // Optional, frame per seconds for qr code scanning
           qrbox: { width: 450, height: 250 }  // Optional, if you want bounded box UI
@@ -110,4 +110,4 @@ if (isset($aviso) && !empty($aviso)) {
 
 
 
-<?php include('Views/footer.php'); ?>
+<?php include_once 'Views/footer.php'; ?>
