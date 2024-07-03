@@ -10,17 +10,17 @@ class MDFEController extends Controller {
     /**
      * @var MDFEService
      */
-    private $MDFEservice;
+    private $mdfeService;
 
     public function __construct() {
-        $this->MDFEservice = new MDFEService();
+        $this->mdfeService = new MDFEService();
     }
 
     //-----------------------------------------------
     // Authenticated routes
     public function listmdfe() {
-        $MDFEs = $this->MDFEservice->getMFDEs();
-        return $this->view('mdfe/list.php', ['dados' => $MDFEs]);
+        $mdfeList = $this->mdfeService->getMFDEs();
+        return $this->view('mdfe/list.php', ['dados' => $mdfeList]);
     }
 
     public function newMDFE() {
@@ -28,26 +28,26 @@ class MDFEController extends Controller {
     }
 
     public function saveMDFE() {
-        $CHAVE = trim($_POST['CHAVE']);
-        $PROTOCOLO = trim($_POST['PROTOCOLO']);
-        $FILIAL_ID = trim($_POST['FILIAL_ID']);
-        $COD_MUNICIPIO = trim($_POST['COD_MUNICIPIO']);
-        $STATUS = 'pendente';
+        $chave = trim($_POST['CHAVE']);
+        $protocolo = trim($_POST['PROTOCOLO']);
+        $filial_id = trim($_POST['FILIAL_ID']);
+        $cod_municipio = trim($_POST['COD_MUNICIPIO']);
+        $status = 'pendente';
 
-        $erros = $this->validateForm($CHAVE, $PROTOCOLO, $FILIAL_ID, $COD_MUNICIPIO);
+        $erros = $this->validateForm($chave, $protocolo, $filial_id, $cod_municipio);
 
         if (count($erros) > 0) {
             return $this->view('mdfe/new.php', ['erros' => $erros]);
         }
 
-        $insert = $this->MDFEservice->insertMDFE($CHAVE, $PROTOCOLO, $FILIAL_ID, $COD_MUNICIPIO, $STATUS);
+        $insert = $this->mdfeService->insertMDFE($chave, $protocolo, $filial_id, $cod_municipio, $status);
 
         if ($insert <= 0) {
             return $this->view('mdfe/new.php', ['aviso' => 'Falha na inclusão. Contate o suporte']);
         }
 
         $_SESSION['success']  = 'MDF-e cadastrado com sucesso';
-        return $this->redirect('/listar-mdfe');
+        $this->redirect('/listar-mdfe');
     }
 
     //-----------------------------------------------
@@ -59,36 +59,37 @@ class MDFEController extends Controller {
     public function closeMDFE() {
         $barcode = $_REQUEST['barcode'];
 
-        $mdfe = $this->MDFEservice->findMdfe($barcode);
+        $mdfe = $this->mdfeService->findMdfe($barcode);
 
         if (is_null($mdfe) || !$mdfe) {
             return $this->view('mdfe/close.php', ['aviso' => 'MDF-e não localizado na base de dados']);
-        }        
+        }
 
-        return $this->redirect('/mdfe-encerrado');
+        $this->redirect('/mdfe-encerrado');
     }
 
     public function mdfeClosed() {
         return $this->view('mdfe/closed.php');
     }
 
-    private function validateForm($CHAVE, $PROTOCOLO, $FILIAL_ID, $COD_MUNICIPIO) : array {
+    private function validateForm($chave, $protocolo, $filial_id, $cod_municipio) : array {
         $erros = [];
+        $required_field_message = 'Campo obrigatório';
 
-        if (!$CHAVE) {
-            $erros['CHAVE'] = 'Campo obrigatório';
+        if (!$chave) {
+            $erros['CHAVE'] = $required_field_message;
         }
 
-        if (!$PROTOCOLO) {
-            $erros['PROTOCOLO'] = 'Campo obrigatório';
+        if (!$protocolo) {
+            $erros['PROTOCOLO'] = $required_field_message;
         }
 
-        if (!$FILIAL_ID) {
-            $erros['FILIAL_ID'] = 'Campo obrigatório';
+        if (!$filial_id) {
+            $erros['FILIAL_ID'] = $required_field_message;
         }
 
-        if (!$COD_MUNICIPIO) {
-            $erros['COD_MUNICIPIO'] = 'Campo obrigatório';
+        if (!$cod_municipio) {
+            $erros['COD_MUNICIPIO'] = $required_field_message;
         }
 
         return $erros;

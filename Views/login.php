@@ -3,7 +3,7 @@
 
     <h1>Entrar no sistema</h1>
 
-    <?php 
+    <?php
     if (isset($aviso) && !empty($aviso)) {
     ?>
     <div class="alert alert-warning"><?=$aviso;?></div>

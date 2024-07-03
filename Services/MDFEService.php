@@ -5,10 +5,10 @@ namespace App\Services;
 use Fox3\Helpers\Mysql;
 
 class MDFEService {
-    public function insertMDFE($CHAVE, $PROTOCOLO, $FILIAL_ID, $COD_MUNICIPIO, $STATUS) {
+    public function insertMDFE($chave, $protocolo, $filial_id, $cod_municipio, $status) {
         $con = Mysql::conn();
         $stm = $con->prepare('INSERT INTO mdfes (chave, protocolo, filial_id, cod_municipio, status) VALUES (?, ?, ?, ?, ?)');
-        $stm->bind_param('ssiss', $CHAVE, $PROTOCOLO, $FILIAL_ID, $COD_MUNICIPIO, $STATUS);
+        $stm->bind_param('ssiss', $chave, $protocolo, $filial_id, $cod_municipio, $status);
         $stm->execute();
         return $stm->affected_rows;
     }

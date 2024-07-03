@@ -47,17 +47,17 @@ class LoginController extends Controller {
         $this->updatePassword($new_password);
 
         $_SESSION['success'] = 'Senha alterada com sucesso';
-        return $this->redirect('/listar-mdfe');
+        $this->redirect('/listar-mdfe');
     }
 
     private function hashPassword($password) {
         return md5(md5(md5($password)));
     }
 
-    private function getUser($USERNAME) {
+    private function getUser($username) {
         $con = Mysql::conn();
         $stm = $con->prepare('SELECT * FROM usuarios WHERE usuario = ?');
-        $stm->bind_param('s', $USERNAME);
+        $stm->bind_param('s', $username);
         $stm->execute();
         $result = $stm->get_result();
         return $result->fetch_object();

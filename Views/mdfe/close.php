@@ -1,4 +1,4 @@
-<?php include('Views/header.php'); ?>
+<?php include_once 'Views/header.php'; ?>
 
 <p>
   Escaneie com a câmera o código de barras do MDFE. 
