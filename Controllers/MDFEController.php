@@ -18,11 +18,12 @@ class MDFEController extends Controller {
     private $mdfeService;
 
     private $newMDFETemplate = 'mdfe/new.php';
+    private $closeDFETemplate = 'mdfe/close.php';
 
     /**
      * UF -> Code relation
      */
-    private $uf_codes = array(
+    private $ufCodes = array(
         "AC" => "12",
         "AL" => "27",
         "AM" => "13",
@@ -93,7 +94,7 @@ class MDFEController extends Controller {
     //-----------------------------------------------
     // Public routes
     public function closeMDFEPage() {
-        return $this->view('mdfe/close.php');
+        return $this->view($this->closeDFETemplate);
     }
 
     public function closeMDFE() {
@@ -102,13 +103,13 @@ class MDFEController extends Controller {
         $mdfe = $this->mdfeService->findMdfe($barcode);
 
         if (is_null($mdfe) || !$mdfe) {
-            return $this->view('mdfe/close.php', ['aviso' => 'MDF-e não localizado na base de dados']);
+            return $this->view($this->closeDFETemplate, ['aviso' => 'MDF-e não localizado na base de dados']);
         }
 
         $close_result = $this->sendEncerramento($mdfe['razao_social'], $mdfe['cnpj'], $mdfe['ie'], $mdfe['uf'], $mdfe['chave'], $mdfe['protocolo'], $mdfe['cod_municipio']);
 
         if ($close_result[0] == false) {
-            return $this->view('mdfe/close.php', ['aviso' => 'Falha ao encerrar o MDF-e. ' . $close_result[1]]);
+            return $this->view($this->closeDFETemplate, ['aviso' => 'Falha ao encerrar o MDF-e. ' . $close_result[1]]);
         }
 
         $this->mdfeService->closeMDFE($mdfe['id']);
@@ -139,7 +140,7 @@ class MDFEController extends Controller {
         
             $tools = new Tools(json_encode($config), $certificate);
         
-            $cUF = $this->uf_codes[$uf];;
+            $cUF = $this->ufCodes[$uf];;
             //$dtEnc = 'Y-m-d'; // Opcional, caso nao seja preenchido pegara HOJE
             $resp = $tools->sefazEncerra($chave, $nProt, $cUF, $cMun); //, $dtEnc
         
