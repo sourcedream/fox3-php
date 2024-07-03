@@ -55,7 +55,7 @@ function montaSelecaoCamera(devices, dvDestini, outputId, onScan) {
     <select id='dbCamera'>
     ${devices.map(d => `<option value="${d.id}">${d.label}</option>`).join('')}
     </select>
-    <button id="btnInicarScanGen" type="button" class="btn btn-success">Selecionar iniciar scan</button>`;
+    <button id="btnInicarScanGen" type="button" class="btn btn-success">Iniciar scan</button>`;
 
     document.querySelector('#btnInicarScanGen').addEventListener('click', () => {
         const cameraId = document.querySelector('#dbCamera').value;

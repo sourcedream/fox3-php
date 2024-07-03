@@ -25,7 +25,7 @@ class MDFEService {
         $stm = $con->prepare('SELECT mdfes.*, filiais.cnpj, filiais.ie, filiais.uf, filiais.nome as razao_social FROM mdfes INNER JOIN filiais ON (filiais.id = mdfes.filial_id) WHERE chave = ?');
         $stm->bind_param('s', $barcode);
         $stm->execute();
-        return $stm->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $stm->get_result()->fetch_assoc();
     }
 
     public function closeMDFE(int $id) {

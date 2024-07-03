@@ -18,7 +18,7 @@
     <table class="table" style="margin-top: 15px">
         <thead>
             <tr>
-                <th scope="col">#</th>
+                <th scope="col" class="d-none d-md-block">#</th>
                 <th scope="col">Filial</th>
                 <th scope="col">Chave</th>
                 <th scope="col">Protocolo</th>
@@ -28,7 +28,7 @@
         <tbody>
             <?php foreach($dados as $dado) { ?>
             <tr>
-                <th scope="row"><?=$dado['id'];?></th>
+                <th scope="row" class="d-none d-md-block"><?=$dado['id'];?></th>
                 <td><?=$dado['nome_filial'];?></td>
                 <td><?=$dado['chave'];?></td>
                 <td><?=$dado['protocolo'];?></td>
