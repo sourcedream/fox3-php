@@ -51,7 +51,10 @@ class LoginController extends Controller {
     }
 
     private function hashPassword($password) {
-        return md5(md5(md5($password)));
+        $options = [
+            'cost' => 12,
+        ];
+        return password_hash($password, PASSWORD_BCRYPT, $options);
     }
 
     private function getUser($username) {
