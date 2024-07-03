@@ -10,9 +10,12 @@
     <?php } ?>
 
     <a href="/novo-mdfe" class="btn btn-info">Novo MDFE</a>
+    <div style="float: right">
+    <a href="/trocar-senha" class="btn btn-info">Trocar Senha</a>
     <a href="/sair" class="btn btn-warning">Sair do Sistema</a>
+    </div>
 
-    <table class="table">
+    <table class="table" style="margin-top: 15px">
         <thead>
             <tr>
                 <th scope="col">#</th>

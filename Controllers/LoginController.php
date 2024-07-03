@@ -17,7 +17,7 @@ class LoginController extends Controller {
             return $this->view('login.php', ['aviso' => 'Usuário ou senha inválidos']);
         }
 
-        if ($user->senha != md5(md5(md5($_POST['PASSWORD'])))) {
+        if ($user->senha != $this->hashPassword($_POST['PASSWORD'])) {
             return $this->view('login.php', ['aviso' => 'Usuário ou senha inválidos']);
         }
 
@@ -30,6 +30,30 @@ class LoginController extends Controller {
         $this->redirect('/');
     }
 
+    public function password() {
+        return $this->view('users/change_password.php');
+    }
+
+    public function change() {
+        $password = $_POST['PASSWORD'];
+        $password_repeat = $_POST['PASSWORD_REPEAT'];
+
+        if ($password != $password_repeat) {
+            return $this->view('users/change_password.php', ['aviso' => 'As senhas não conferem']);
+        }
+
+        $new_password = $this->hashPassword($password);
+
+        $this->updatePassword($new_password);
+
+        $_SESSION['success'] = 'Senha alterada com sucesso';
+        return $this->redirect('/listar-mdfe');
+    }
+
+    private function hashPassword($password) {
+        return md5(md5(md5($password)));
+    }
+
     private function getUser($USERNAME) {
         $con = Mysql::conn();
         $stm = $con->prepare('SELECT * FROM usuarios WHERE usuario = ?');
@@ -37,5 +61,13 @@ class LoginController extends Controller {
         $stm->execute();
         $result = $stm->get_result();
         return $result->fetch_object();
+    }
+
+    private function updatePassword($new_password) {
+        $con = Mysql::conn();
+        $stm = $con->prepare('UPDATE usuarios SET senha = ?');
+        $stm->bind_param('s', $new_password);
+        $stm->execute();
+        return $stm->affected_rows;
     }
 }

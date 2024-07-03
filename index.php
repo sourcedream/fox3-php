@@ -25,7 +25,14 @@ $routes = [
   ],
 
   '/sair' => [
+    ['middleware' => ['AuthMiddleware']],
     ['get' => 'LoginController@logout'],
+  ],
+
+  '/trocar-senha' => [
+    ['middleware' => ['AuthMiddleware']],
+    ['get' => 'LoginController@password'],
+    ['post' => 'LoginController@change'],
   ],
 
   '/listar-mdfe' => [
