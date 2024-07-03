@@ -17,6 +17,8 @@ class Server {
     }
 
     public function serve() {
+        session_start();
+        
         $uri = @$_SERVER['REQUEST_URI'];
         $method = @$_SERVER['REQUEST_METHOD'];
         $parsed_url = parse_url($uri, PHP_URL_PATH);
