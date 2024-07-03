@@ -15,7 +15,7 @@ class MDFEService {
 
     public function getMFDEs() {
         $con = Mysql::conn();
-        $stm = $con->prepare('SELECT mdfes.*, filiais.nome AS nome_filial FROM mdfes INNER JOIN filiais ON (filiais.id = mdfes.filial_id)');//TODO: Order by aqui
+        $stm = $con->prepare('SELECT mdfes.*, filiais.nome AS nome_filial FROM mdfes INNER JOIN filiais ON (filiais.id = mdfes.filial_id) ORDER BY id DESC');
         $stm->execute();
         return $stm->get_result()->fetch_all(MYSQLI_ASSOC);
     }
