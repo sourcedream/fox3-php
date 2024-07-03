@@ -2,16 +2,24 @@
 
 namespace App\Controllers;
 
+use App\Services\MDFEService;
 use Fox3\Controller;
-use Fox3\Helpers\Mysql;
 
 class MDFEController extends Controller {
 
+    /**
+     * @var MDFEService
+     */
+    private $MDFEservice;
+
+    public function __construct() {
+        $this->MDFEservice = new MDFEService();
+    }
+
     //-----------------------------------------------
     // Authenticated routes
-    // TODO: Autenticate the user here
     public function listmdfe() {
-        $MDFEs = $this->getMFDEs();
+        $MDFEs = $this->MDFEservice->getMFDEs();
         return $this->view('mdfe/list.php', ['dados' => $MDFEs]);
     }
 
@@ -32,7 +40,7 @@ class MDFEController extends Controller {
             return $this->view('mdfe/new.php', ['erros' => $erros]);
         }
 
-        $insert = $this->insertMDFE($CHAVE, $PROTOCOLO, $FILIAL_ID, $COD_MUNICIPIO, $STATUS);
+        $insert = $this->MDFEservice->insertMDFE($CHAVE, $PROTOCOLO, $FILIAL_ID, $COD_MUNICIPIO, $STATUS);
 
         if ($insert <= 0) {
             return $this->view('mdfe/new.php', ['aviso' => 'Falha na inclusão. Contate o suporte']);
@@ -51,7 +59,7 @@ class MDFEController extends Controller {
     public function closeMDFE() {
         $barcode = $_REQUEST['barcode'];
 
-        $mdfe = $this->findMdfe($barcode);
+        $mdfe = $this->MDFEservice->findMdfe($barcode);
 
         if (is_null($mdfe) || !$mdfe) {
             return $this->view('mdfe/close.php', ['aviso' => 'MDF-e não localizado na base de dados']);
@@ -62,32 +70,6 @@ class MDFEController extends Controller {
 
     public function mdfeClosed() {
         return $this->view('mdfe/closed.php');
-    }
-
-    //-----------------------------------------------
-    // Database Functions
-
-    private function insertMDFE($CHAVE, $PROTOCOLO, $FILIAL_ID, $COD_MUNICIPIO, $STATUS) {
-        $con = Mysql::conn();
-        $stm = $con->prepare('INSERT INTO mdfes (chave, protocolo, filial_id, cod_municipio, status) VALUES (?, ?, ?, ?, ?)');
-        $stm->bind_param('ssiss', $CHAVE, $PROTOCOLO, $FILIAL_ID, $COD_MUNICIPIO, $STATUS);
-        $stm->execute();
-        return $stm->affected_rows;
-    }
-
-    private function getMFDEs() {
-        $con = Mysql::conn();
-        $stm = $con->prepare('SELECT mdfes.*, filiais.nome AS nome_filial FROM mdfes INNER JOIN filiais ON (filiais.id = mdfes.filial_id)');//TODO: Order by aqui
-        $stm->execute();
-        return $stm->get_result()->fetch_all(MYSQLI_ASSOC);
-    }
-
-    private function findMdfe(string $barcode) {
-        $con = Mysql::conn();
-        $stm = $con->prepare('SELECT * FROM mdfes WHERE chave = ?');
-        $stm->bind_param('s', $barcode);
-        $stm->execute();
-        return $stm->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
     private function validateForm($CHAVE, $PROTOCOLO, $FILIAL_ID, $COD_MUNICIPIO) : array {
