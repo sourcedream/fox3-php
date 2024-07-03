@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^.*$ - [R=403,L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    Order allow,deny
+    Deny from all
+</IfModule>

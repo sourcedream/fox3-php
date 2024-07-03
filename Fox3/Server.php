@@ -17,6 +17,8 @@ class Server {
     }
 
     public function serve() {
+        session_start();
+        
         $uri = @$_SERVER['REQUEST_URI'];
         $method = @$_SERVER['REQUEST_METHOD'];
         $parsed_url = parse_url($uri, PHP_URL_PATH);
@@ -27,7 +29,7 @@ class Server {
         $choosen_route =$router->findRouteDefinition($parsed_url, $this->routes);
 
         if (!$this->handleMiddleware($choosen_route)) {
-            header("Location: /");
+            header("Location: /login");
             exit();
         }
         

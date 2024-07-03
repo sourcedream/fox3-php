@@ -19,9 +19,8 @@ class Mysql {
     public $connection;
 
     private function __construct() {
-        $this->connection = new mysqli(getenv('DBHOST') ?? 'localhost', getenv('DBUSER') ?? 'root', getenv('DBPASS') ?? '', getenv('DBNAME') ?? '');
+        $this->connection = new mysqli(getenv('DBHOST') ?? 'localhost', getenv('DBUSER') ?? 'root', getenv('DBPASS') ?? '', getenv('DBNAME') ?? 'mdfe');
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-        $this->connection->set_charset(getenv("DBCHARSET") ?? "utf8mb4");
     }
 
     public static function getInstance() : Mysql {

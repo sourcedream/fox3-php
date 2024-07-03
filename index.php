@@ -11,16 +11,37 @@ spl_autoload_register(function ( $class_name ) {
 
 });
 
+putenv('DBUSER=root');
+putenv('DBNAME=mdfes');
+
 use Fox3\Server;
 
 $routes = [
-  '/usuarios' => [
-    ['get' => 'UsersController@index'],
-    ['post' => 'Controllers/Users@create'],
+  '/login' => [
+    ['get' => 'LoginController@index'],
+    ['post' => 'LoginController@login'],
   ],
-  '/usuarios/{id}' => [
+
+  '/sair' => [
     ['middleware' => ['AuthMiddleware']],
-    ['get' => 'HomeController@showUser'],
+    ['get' => 'LoginController@logout'],
+  ],
+
+  '/trocar-senha' => [
+    ['middleware' => ['AuthMiddleware']],
+    ['get' => 'LoginController@password'],
+    ['post' => 'LoginController@change'],
+  ],
+
+  '/listar-mdfe' => [
+    ['middleware' => ['AuthMiddleware']],
+    ['get' => 'MDFEController@listmdfe'],
+  ],
+
+  '/novo-mdfe' => [
+    ['middleware' => ['AuthMiddleware']],
+    ['get' => 'MDFEController@newMDFE'],
+    ['post' => 'MDFEController@saveMDFE'],
   ],
 
   '/encerrar-mdfe' => [
@@ -28,11 +49,12 @@ $routes = [
     ['post' => 'MDFEController@closeMDFE'],
   ],
 
+  '/mdfe-encerrado' => [
+    ['get' => 'MDFEController@mdfeClosed']
+  ],
+
   '/' => [
     ['get' => 'HomeController@index'],
-  ],
-  '/sobre' => [
-    ['get' => 'HomeController@sobre'],
   ],
 ];
 

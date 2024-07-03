@@ -7,5 +7,8 @@
         "files": [
             "Fox3/Helpers/helpers.php"
         ]
+    },
+    "require": {
+        "nfephp-org/sped-mdfe": "dev-master"
     }
 }
