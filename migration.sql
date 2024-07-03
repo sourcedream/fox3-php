@@ -27,4 +27,4 @@ CREATE TABLE usuarios (
 
 INSERT INTO filiais (nome, cnpj, ie, uf) VALUES ('Razao Social Matriz', '13685789000103', '52951997575', 'MT'), ('Razao Social Filial', '22458473000170', '49369203090', 'MT');
 
-INSERT INTO usuarios (usuario, senha) VALUES ('admin@admin.com', '77e2edcc9b40441200e31dc57dbb8829'); --admin
+INSERT INTO usuarios (usuario, senha) VALUES ('admin@admin.com', '$2y$12$XcGyx38j/43RpNJmvAWldOZZu2DSc8SlgSOOzuoWb3XD0XBGoPbge'); --admin

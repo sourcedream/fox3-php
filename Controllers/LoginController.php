@@ -11,13 +11,13 @@ class LoginController extends Controller {
     }
 
     public function login() {
-        $user = $this->getUser($_POST['USERNAME']);
+        $user = $this->getUser(strtolower($_POST['USERNAME']));
 
         if (!isset($user)) {
             return $this->view('login.php', ['aviso' => 'Usuário ou senha inválidos']);
         }
 
-        if ($user->senha != $this->hashPassword($_POST['PASSWORD'])) {
+        if (!password_verify($_POST['PASSWORD'], $user->senha)) {
             return $this->view('login.php', ['aviso' => 'Usuário ou senha inválidos']);
         }
 

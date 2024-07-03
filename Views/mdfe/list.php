@@ -12,7 +12,7 @@
     <a href="/novo-mdfe" class="btn btn-info">Novo MDFE</a>
     <div style="float: right">
     <a href="/trocar-senha" class="btn btn-info">Trocar Senha</a>
-    <a href="/sair" class="btn btn-warning">Sair do Sistema</a>
+    <a href="/sair" class="btn btn-warning">Sair</a>
     </div>
 
     <table class="table" style="margin-top: 15px">
