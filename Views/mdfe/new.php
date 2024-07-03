@@ -6,10 +6,9 @@
     <h1>Novo MDFE</h1>
 
     <form method="POST">
-        <div class="mb-3">
-            <label for="CHAVE" class="form-label">Chave</label>
-            <input type="text" class="form-control" id="CHAVE" name="CHAVE" aria-describedby="Chave do MDFE" required>
-            <div id="CHAVE" class="form-text">Chave do MDFE</div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="CHAVE" name="CHAVE" aria-describedby="Chave do MDFE" required placeholder="Chave">
+            <button class="btn btn-info" type="button">Escanear Chave</button>
         </div>
 
         <div class="mb-3">

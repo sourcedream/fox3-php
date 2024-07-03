@@ -22,9 +22,17 @@ class MDFEService {
 
     public function findMdfe(string $barcode) {
         $con = Mysql::conn();
-        $stm = $con->prepare('SELECT * FROM mdfes WHERE chave = ?');
+        $stm = $con->prepare('SELECT mdfes.*, filiais.cnpj, filiais.ie, filiais.uf, filiais.nome as razao_social FROM mdfes INNER JOIN filiais ON (filiais.id = mdfes.filial_id) WHERE chave = ?');
         $stm->bind_param('s', $barcode);
         $stm->execute();
         return $stm->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function closeMDFE(int $id) {
+        $con = Mysql::conn();
+        $stm = $con->prepare('UPDATE mdfes SET status = ? WHERE id = ?');
+        $stm->bind_param('si', $id, 'encerrado');
+        $stm->execute();
+        return $stm->affected_rows;
     }
 }
